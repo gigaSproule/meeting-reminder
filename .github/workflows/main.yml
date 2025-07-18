@@ -29,8 +29,8 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
           cache: 'maven'
-      - name: Run check
-        run: mvn clean check
+      - name: Run verify
+        run: mvn clean verify
       #  release-dry-run:
       #    runs-on: "ubuntu-latest"
       #    timeout-minutes: 30
