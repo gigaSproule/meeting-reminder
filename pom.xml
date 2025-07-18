@@ -76,7 +76,7 @@
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>3.6.0</version>
                 <configuration>
-                    <configLocation>https://raw.githubusercontent.com/gigaSproule/digital-blasphemy-client-java/refs/heads/main/config/checkstyle/checkstyle.xml</configLocation>
+                    <configLocation>https://raw.githubusercontent.com/gigaSproule/checkstyle-config/refs/heads/main/checkstyle.xml</configLocation>
                     <encoding>UTF-8</encoding>
                     <consoleOutput>true</consoleOutput>
                     <failsOnError>true</failsOnError>
