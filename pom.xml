@@ -19,6 +19,9 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Only used to keep the exec arguments happy -->
+        <title/>
+        <zoomId/>
     </properties>
 
     <dependencies>
@@ -76,7 +79,9 @@
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>3.6.0</version>
                 <configuration>
-                    <configLocation>https://raw.githubusercontent.com/gigaSproule/checkstyle-config/refs/heads/main/checkstyle.xml</configLocation>
+                    <configLocation>
+                        https://raw.githubusercontent.com/gigaSproule/checkstyle-config/refs/heads/main/checkstyle.xml
+                    </configLocation>
                     <consoleOutput>true</consoleOutput>
                     <failsOnError>true</failsOnError>
                     <linkXRef>false</linkXRef>
@@ -90,6 +95,27 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.6.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>com.benjaminsproule.Main</mainClass>
+                    <arguments>
+                        <argument>-t</argument>
+                        <argument>${title}</argument>
+                        <argument>-z</argument>
+                        <argument>${zoomId}</argument>
+                    </arguments>
+                </configuration>
             </plugin>
         </plugins>
     </build>
