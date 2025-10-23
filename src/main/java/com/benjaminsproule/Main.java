@@ -56,14 +56,15 @@ public class Main {
         if (zoomMeetingId != null) {
             JButton openZoomButton = new JButton("Open Zoom meeting");
             openZoomButton.addActionListener(actionEvent -> {
+                String zoomUri = "zoommtg://zoom.us/join?action=join&confno=" + zoomMeetingId.replace(" ", "");
                 try {
                     String openCommand = switch (System.getProperty("os.name")) {
-                        case "Windows" -> "start \"\"";
+                        case "Windows" -> "start";
                         case "Mac OS X" -> "open";
                         case "Linux" -> "xdg-open";
                         default -> "";
                     };
-                    Runtime.getRuntime().exec(openCommand + " zoommtg://zoom.us/join?action=join&confno=" + zoomMeetingId.replace(" ", ""));
+                    Runtime.getRuntime().exec(openCommand + " " + zoomUri);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
