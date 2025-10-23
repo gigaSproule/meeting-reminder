@@ -1,20 +1,9 @@
 package com.benjaminsproule;
 
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
+import org.apache.commons.cli.*;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.WindowConstants;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 public class Main {
@@ -68,10 +57,17 @@ public class Main {
             JButton openZoomButton = new JButton("Open Zoom meeting");
             openZoomButton.addActionListener(actionEvent -> {
                 try {
-                    Runtime.getRuntime().exec("open zoommtg://zoom.us/join?action=join&confno=" + zoomMeetingId.replace(" ", ""));
+                    String openCommand = switch (System.getProperty("os.name")) {
+                        case "Windows" -> "start \"\"";
+                        case "Mac OS X" -> "open";
+                        case "Linux" -> "xdg-open";
+                        default -> "";
+                    };
+                    Runtime.getRuntime().exec(openCommand + " zoommtg://zoom.us/join?action=join&confno=" + zoomMeetingId.replace(" ", ""));
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+                frame.dispose();
             });
             c.gridy += 1;
             panel.add(openZoomButton, c);
